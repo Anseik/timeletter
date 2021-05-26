@@ -422,7 +422,7 @@ const LetterCreate = () => {
       }
 
       console.log(body)
-
+      
       axios.post(BASE_URL + 'letter/create', body, {
         headers: {
           Authorization: TOKEN

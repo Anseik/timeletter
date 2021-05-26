@@ -66,7 +66,10 @@ const MapCreate = (props) => {
       marker.setPosition(latlng);
 
       // 위경도를 갱신
-      if (latlng.getLat() !== NaN) {
+      if (isNaN(latlng.getLat()) || isNaN(latlng.getLng())) {
+        setLat(0)
+        setLng(0)
+      } else {
         setLat(latlng.getLat())
         setLng(latlng.getLng())
       }
