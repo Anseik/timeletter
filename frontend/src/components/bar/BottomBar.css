@@ -3,8 +3,7 @@
     height: 3rem;
 }
 .bottombar {
-    background-color: coral;
+    background-color: #2D0968;
     position:fixed;
     bottom: 0;
-    /* display: flex; */
 }

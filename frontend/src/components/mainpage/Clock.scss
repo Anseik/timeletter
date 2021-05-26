@@ -1,0 +1,74 @@
+// clock container
+.clock{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    // clock dot
+    .dot{
+        background-color: #262626;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    // clock handles, common attributes
+    .hour, .min, .sec{
+        position: absolute;
+        background-color: #262626;
+        transform-origin: 50% 100%;
+        border-radius: 2px;
+        &.animate{
+            transition: all 0.6s ease-in-out;
+        }
+    }
+
+    // hour handle position and size
+    .hour{
+        width: 5px;
+        height: 35%;
+        top: 15%;
+    }
+
+    // minute handle position and size
+    .min{
+        width: 3px;
+        height: 40%;
+        top: 10%;
+    }
+
+    // second handle position and size
+    .sec{
+        width: 1px;
+        height: 45%;
+        top: 5%;
+    }
+
+    // style for dark clock
+    &.dark{
+        border: 2px solid #262626;
+        .dot{
+            background-color: #262626;
+        }
+        .hour, .min, .sec{
+            background-color: #262626;
+        }
+    }
+
+    // style for white clock
+    &.white{
+        border: 2px solid #eee;
+        .dot{
+            background-color: #eee;
+        }
+        .hour, .min, .sec{
+            background-color: #eee;
+        }
+    }
+
+    
+}

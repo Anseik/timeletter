@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     bottom: 0,
     width: '100%',
     zIndex: '1',
-    backgroundColor: '#3f51b5',
+    backgroundColor: '#2D0968',
   },
   action: {
     color: '#ffffff !important'
@@ -26,7 +26,7 @@ export default function BottomBar() {
   const classes = useStyles()
   const history = useHistory()
 
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(null);
 
   const pathList = [
     '/',
@@ -43,8 +43,8 @@ export default function BottomBar() {
   return (
     <BottomNavigation className={classes.nav} value={value} onChange={handleChange}>
       <BottomNavigationAction className={classes.action} label="홈" value={0} icon={<HomeRoundedIcon />} />
-      <BottomNavigationAction className={classes.action} label="캡슐생성" value={1} icon={<MailRoundedIcon />} />
-      <BottomNavigationAction className={classes.action} label="캡슐조회" value={2} icon={<DraftsRoundedIcon />} />
+      <BottomNavigationAction className={classes.action} label="레터생성" value={1} icon={<MailRoundedIcon />} />
+      <BottomNavigationAction className={classes.action} label="레터조회" value={2} icon={<DraftsRoundedIcon />} />
       <BottomNavigationAction className={classes.action} label="그룹" value={3} icon={<GroupRoundedIcon />} />
     </BottomNavigation>
   );

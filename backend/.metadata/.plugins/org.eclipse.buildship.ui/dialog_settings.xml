@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.buildship.ui.wizard.project.import">
+<<<<<<< HEAD
+		<item key="project_location" value="C:\Users\multicampus\Documents\s04p31d105\backend"/>
+		<item key="apply_working_sets" value="false"/>
+		<list key="working_sets">
+		</list>
+=======
 		<item key="project_location" value="C:\Users\multicampus\MINO\s04p31d105\backend"/>
+>>>>>>> 7a22820934b6c2d4f8e85639874227ccbc953506
 	</section>
 </section>

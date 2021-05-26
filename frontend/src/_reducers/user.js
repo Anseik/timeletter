@@ -1,31 +1,27 @@
-const { createSlice } = require('@reduxjs/toolkit');
-const { logIn } = require('../_actions/user');
+import { createSlice } from '@reduxjs/toolkit';
+import { mypage } from '../_actions/user';
 
 const initialState = {
-  isLoggingIn: false,
-  data: null,
+  data:{letters:[]}
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logOut(state, action) {
-      state.data = null;
-    }
+    
   },
   extraReducers: (builder) => builder
-    .addCase(logIn.pending, (state, action) => {
-      state.data = null;
-      state.isLoggingIn = true;
+    .addCase(mypage.pending, (state, action) => {
+      state.data.letters = [];
     })
-    .addCase(logIn.fulfilled, (state, action) => {
+    .addCase(mypage.fulfilled, (state, action) => {
       state.data = action.payload;
-      state.isLoggingIn = false;
     })
-    .addCase(logIn.rejected, (state, action) => {
+    .addCase(mypage.rejected, (state, action) => {
       state.error = action.payload;
     })
 })
 
-module.exports = userSlice;
+
+export default userSlice;

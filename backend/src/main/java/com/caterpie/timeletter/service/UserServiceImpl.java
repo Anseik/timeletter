@@ -1,42 +1,69 @@
 package com.caterpie.timeletter.service;
 
+import java.util.Collections;
+import java.util.Optional;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.caterpie.timeletter.controller.SaltSHA256;
-import com.caterpie.timeletter.dto.User;
+import com.caterpie.timeletter.dto.JoinDto;
+import com.caterpie.timeletter.dto.UserModifyDto;
+import com.caterpie.timeletter.entity.Authority;
+import com.caterpie.timeletter.entity.User;
+import com.caterpie.timeletter.jwt.JwtFilter;
 import com.caterpie.timeletter.repository.UserRepository;
+import com.caterpie.timeletter.util.SecurityUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	private PasswordEncoder passwordEncoder;
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
+	public UserServiceImpl(UserRepository userRepo, PasswordEncoder passwordEncoder) {
+        this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
+    }
+	
 	@Override
-	public void insertUser(User user) {
-		// 1. 가입할 회원의 고유 salt 생성 및 저장
-		String salt = SaltSHA256.generateSalt();
-		user.setSalt(salt);
+	public void insertUser(JoinDto joinDto) {
+		if (userRepo.findOneWithAuthoritiesByEmail(joinDto.getEmail()).orElse(null) != null) {
+            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
+        }
 		
-		// 2. 입력된 비밀번호 + salt 활용해서 암호화된 비밀번호 생성
-		String password = user.getPassword();
-		password = SaltSHA256.getEncrypt(password, salt);
+		Authority authority = Authority.builder()
+                .authorityName("ROLE_USER")
+                .build();
 		
-		// 3. 입력 비밀번호 삽입
-		user.setPassword(password);
+		User user = User.builder()
+				.email(joinDto.getEmail())
+				.password(passwordEncoder.encode(joinDto.getPassword()))
+				.phoneNumber(joinDto.getPhoneNumber())
+				.name(joinDto.getName())
+				.activated(true)
+				.authorities(Collections.singleton(authority))
+				.build();
 		
-		// 4. 유저 정보 DB에 삽입
+
 		userRepo.save(user);
+		logger.debug("user를 저장하였습니다.");
 	}
 
 	@Override
-	public void updateUser(User user) {
-		int userId = user.getUserId();
-		String salt = SaltSHA256.generateSalt();
-		String password = SaltSHA256.getEncrypt(user.getPassword(), salt);
+	public void updateUser(UserModifyDto modReq) {
 		
-		userRepo.updateUser(password, salt, userId);
+//		int userId = modReq.getUserId();
+////		String salt = SaltSHA256.generateSalt();
+//		String password = SaltSHA256.getEncrypt(modReq.getPassword(), salt);
+//		userRepo.updateUser(modReq.getName(), password, salt, modReq.getPhone(), userId);
 		
 	}
 	
@@ -44,21 +71,22 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(int userId) {
 		userRepo.deleteById(userId);
 	}
-	
+
 	@Override
-	public boolean loginUser(User user) {
-		String email = user.getEmail();	//입력한 id
-		String salt = userRepo.findByEmail(email).getSalt();
-		String password = user.getPassword(); //입력한 pw
-		password = SaltSHA256.getEncrypt(password, salt);	//암호화된 pw
-		
-		User dbUser =  userRepo.findByEmail(email);	//입력한 id로 DB에서 가져온 User
-		
-		if(dbUser.getEmail().equals(email) && dbUser.getPassword().equals(password))
-			return true;
-		else
-			return false;
-		
+	@Transactional(readOnly = true)
+	public Optional<User> getUserWithAuthorities(String email) {
+		return userRepo.findOneWithAuthoritiesByEmail(email);
 	}
-	
+
+	@Override
+    @Transactional(readOnly = true)
+    public Optional<User> getCurrentUserWithAuthorities() {
+        return SecurityUtil
+        		.getCurrentUsername().flatMap(userRepo::findOneWithAuthoritiesByEmail);
+	}
+
+	@Override
+	public Optional<User> getUserById(int userId) {
+		return userRepo.findById(userId);
+	}
 }

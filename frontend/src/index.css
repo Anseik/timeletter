@@ -2,3 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+@font-face {
+    font-family: 'Cafe24Oneprettynight';
+    src: url("./font/Cafe24Oneprettynight.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RIDIBatang';
+    src: url('./font/RIDIBatang.otf');
+    font-weight: normal;
+    font-style: normal;
+}

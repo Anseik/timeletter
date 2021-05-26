@@ -1,13 +1,12 @@
-import React from 'react'
-import LetterCard from './LetterCard'
+import React from "react";
+import NewLetter from "./NewLetter";
 
-
-function LetterCardlist() {
-    return (
-<div>
-    <LetterCard></LetterCard>
-</div>
-    )
+function LetterCardlist(props) {
+  return (
+    <div>
+      <NewLetter></NewLetter>
+    </div>
+  );
 }
 
-export default LetterCardlist
+export default LetterCardlist;

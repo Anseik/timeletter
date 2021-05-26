@@ -1,0 +1,31 @@
+.myimg{
+    width:100px;
+    height:100px;
+    margin-right: 10px;
+    /* background:url("static/images/userImg.png") no-repeat center; */
+  }
+
+/* 이미지 박스 */
+
+.imgpop {
+  float: left;
+  margin-top: -40px;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.MuiCard-root {
+  overflow: visible !important;
+}
+
+.mypage {
+  /* position: absolute; */
+  color: aliceblue;
+  height: 100%;
+  width: 100%;
+  /* margin-bottom: 100px; */
+  /* margin-top: 50px; */
+  padding-top: 50px;
+  padding-bottom: 70px;
+  background:url("../../images/sky2.jpg") repeat center;
+}

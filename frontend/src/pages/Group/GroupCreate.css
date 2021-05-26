@@ -1,0 +1,12 @@
+.groupcreate {
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  padding-bottom: 60px;
+  background: url("../images/sky2.jpg") repeat center;
+  /* color:aliceblue */
+}
+.memberlistd .MuiButton-outlined {
+  border: unset !important;
+}

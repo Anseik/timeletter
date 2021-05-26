@@ -37,6 +37,8 @@
 		<item value="org.sonatype.m2e.egit.feature:0.15.1.201806191431"/>
 		<item value="org.sonatype.m2e.mavenarchiver.feature:0.17.5.202002191804"/>
 	</list>
+<<<<<<< HEAD
+=======
 	<section name="SmartImportWizard">
 		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
@@ -49,4 +51,5 @@
 			<item value="C:\Users\multicampus\Downloads\user-service.zip"/>
 		</list>
 	</section>
+>>>>>>> 7a22820934b6c2d4f8e85639874227ccbc953506
 </section>

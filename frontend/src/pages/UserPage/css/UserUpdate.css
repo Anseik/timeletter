@@ -1,0 +1,25 @@
+.updatewrap {
+    width:100%;
+    margin:auto;
+    max-width:360px;
+    min-height:700px;
+    position:relative;
+    
+    }
+  
+  
+  .update-html {
+      width:100%;
+      height:100%;
+      position:absolute;
+  
+  }
+.papercs2 {
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width:90%;
+    height:75%;
+    position:absolute;
+  
+  }
